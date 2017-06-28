@@ -1,0 +1,13 @@
+.svg {
+  position: absolute;
+  left: 30px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+}

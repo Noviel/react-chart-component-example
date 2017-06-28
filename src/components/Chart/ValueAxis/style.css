@@ -1,0 +1,10 @@
+.value {
+  font-size: 0.75em;
+  color: rgba(122,122,122, 0.9);
+}
+
+.valueline {
+  position: absolute;
+  margin-top: 8px;
+  left: 4px;
+}

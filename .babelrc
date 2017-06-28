@@ -1,0 +1,11 @@
+{
+  "presets": [["env", {
+    "targets": {
+      "node": "0.12.0",
+      "browser": "latest 2 versions"
+    }
+  }], "react", "stage-2"],
+  "ignore": [
+    "node_modules/*"
+  ]
+}

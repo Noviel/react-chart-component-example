@@ -1,0 +1,22 @@
+.month {
+  font-size: 0.75em;
+  color: rgba(122,122,122, 0.9);
+  flex: 1 1 0;
+}
+
+.timeline {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.container {
+  position: absolute;
+  margin-top: 5px;
+  left: 30px;
+}
+
+.year {
+  color: rgba(122,122,122, 0.9);
+  margin-top: 5px;
+}
