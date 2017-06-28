@@ -1,5 +1,8 @@
 # react-chart-component-example
 
+![react chart component sample](https://puu.sh/wwtcd/ba9ec54d70.png "React chart component")  
+[Live on heroku](http://react-chart.herokuapp.com/)
+
 ## Structure
 - `/src/index.js` - client entry point
 - `/src/components/Chart` - chart component
