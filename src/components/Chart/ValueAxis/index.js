@@ -13,7 +13,7 @@ const Value = ({ value, height }) =>
     {value}
   </span>;
 
-const createValues = (max, count, step, height, startHeight = -6) => {
+const createValues = (max, count, step, height, startHeight) => {
   let currentHeight = startHeight;
   const heightStep = height/count;
   const values = new Array(count);
@@ -26,11 +26,11 @@ const createValues = (max, count, step, height, startHeight = -6) => {
   return values;
 };
 
-export default function ValueAxis({ height, max = 80, step = 20 }) {
+export default function ValueAxis({ height, max = 80, step = 20, offset = -12 }) {
   const count = max/step;
   return (
     <div className={style.valueline}>
-      {createValues(max, count, step, height)}
+      {createValues(max, count, step, height, offset)}
     </div>
   );
 }
