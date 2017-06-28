@@ -10,7 +10,7 @@ import ValueAxis from './ValueAxis';
 
 import ProjectionLine from './Lines/ProjectionLine';
 import BackgroundLine, { createLines } from './Lines/BackgroundLines';
-import renderLine from './Lines/ConnectedLines';
+import createConnectedLines from './Lines/createConnectedLines';
 
 import { getNearestToAxisPointIndex, getPointsDiff } from '../../lib/points';
 import { createRenderData } from '../../lib/coordinates';
@@ -88,7 +88,7 @@ export default class Chart extends Component {
           {this.backgroundLines}
           {/* Render zero-line explicitly */}
           <BackgroundLine position={height - 1} start={0} end={width} />
-          {renderLine(renderData)}
+          {createConnectedLines(renderData)}
 
           {isPoint && 
             <ProjectionLine 
