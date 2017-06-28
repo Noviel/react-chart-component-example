@@ -1,11 +1,13 @@
 .value {
-  position: absolute;
+  flex: 1 0 0;
   font-size: 0.75em;
   color: rgba(122,122,122, 0.9);
 }
 
 .valueline {
   position: absolute;
-  margin-top: 8px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
   left: 4px;
 }

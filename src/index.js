@@ -90,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         width={280} 
         height={280}
         valueStep={5}
-        valueMax={77}
-        valueMin={19}
+        valueMax={80}
+        valueMin={-10}
       />    
     </div>,
     document.getElementById('app')
