@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Noviel/react-chart-component-example.git"
+  },  
+  "engines": {
+    "node": "8.1.2"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
