@@ -68,14 +68,32 @@ const currencyData = {
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
-    <Chart 
-      data={currencyData['2015']} 
-      width={600} 
-      height={220}
-      valueStep={20}
-      valueMax={100}
-      valueMin={0}
-    />,
+    <div>
+      <Chart 
+        data={currencyData['2015']} 
+        width={680} 
+        height={180}
+        valueStep={20}
+        valueMax={80}
+        valueMin={0}
+      />
+      <Chart 
+        data={currencyData['2015']} 
+        width={380} 
+        height={180}
+        valueStep={25}
+        valueMax={250}
+        valueMin={0}
+      />
+      <Chart 
+        data={currencyData['2015']} 
+        width={280} 
+        height={280}
+        valueStep={5}
+        valueMax={77}
+        valueMin={19}
+      />    
+    </div>,
     document.getElementById('app')
   );
 });

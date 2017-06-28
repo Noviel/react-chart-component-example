@@ -34,7 +34,7 @@ export default class Chart extends Component {
   initValues = () => {
     const { height, width, data, valueStep, valueMin, valueMax } = this.props;
     
-    const backgroundLinesCount = (valueMax - valueMin)/valueStep;
+    const backgroundLinesCount = Math.ceil((valueMax - valueMin)/valueStep);
     const renderStep = height/backgroundLinesCount;
 
     this.backgroundLines = createLines({ 
@@ -45,7 +45,13 @@ export default class Chart extends Component {
       offset: 1
     });
 
-    this.renderData = createRenderData(data, width, height);
+    this.renderData = createRenderData({ 
+      points: data, 
+      width, 
+      height,
+      valueMin,
+      valueMax
+    });
     // all data should belongs to one year
     this.year = data[0].date.year;
   }
@@ -61,9 +67,17 @@ export default class Chart extends Component {
   })
 
   render() {
-    const { width, height, data } = this.props;
+    const {
+      width,
+      height,
+      data,
+      valueStep,
+      valueMax,
+      valueMin
+    } = this.props;
+
     const { mousePos } = this.state;
-    const { renderData } = this;
+    const { renderData, backgroundLines } = this;
 
     const pointIndex = getNearestToAxisPointIndex(mousePos[0], renderData);
     const isPoint = pointIndex > -1;
@@ -85,8 +99,7 @@ export default class Chart extends Component {
           onMouseMove={this.onMouseMove}
           ref={svg => { this.svg = svg; } }
         >
-          {this.backgroundLines}
-          {/* Render zero-line explicitly */}
+          {backgroundLines}
           <BackgroundLine position={height - 1} start={0} end={width} />
           {createConnectedLines(renderData)}
 
@@ -108,7 +121,7 @@ export default class Chart extends Component {
             data={data[pointIndex]}
           />
         }
-        <ValueAxis height={height} max={100} step={this.step} />
+        <ValueAxis height={height} min={valueMin} max={valueMax} step={valueStep} />
         <Timeline width={width} year={data[0].date.year} offset={height + 20} />
       </div>
     );

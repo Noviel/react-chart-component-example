@@ -1,11 +1,11 @@
 import { dayNumberInYear, daysCountInYear } from './date';
 
 const convertCoord = (from, to = {}, inverse = false) => {
-  const { value, min = 0, max } = from;
+  const { value, min, max } = from;
   const { size, lowerOffset = 0, upperOffset = 0 } = to;
 
   const factor = (size)/(max - min);
-  const scaledValue = value * factor;
+  const scaledValue = (value - min) * factor;
 
   const result = inverse ? 
     size - upperOffset - scaledValue : 
@@ -27,8 +27,8 @@ const dateToCoord = ({ year, month, day, width, leftRightMargin }) =>
     lowerOffset: leftRightMargin
   });
 
-export const createRenderData = (points, width, height, leftRightMargin = 5) => 
+export const createRenderData = ({ points, valueMin = 0, valueMax = 100, width, height, leftRightMargin = 5 }) => 
   points.map(({ date: { month, day, year }, value }) => ([
     dateToCoord({ year, month, day, width, leftRightMargin }), 
-    valueToCoord({ value, height })
+    valueToCoord({ value, min: valueMin, max: valueMax, height })
   ]));
