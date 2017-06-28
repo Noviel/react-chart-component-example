@@ -20,7 +20,7 @@ const VALUELINE_WIDTH = 32;
 
 export default class Chart extends Component {
   state = {
-    mousePos: [-100, -100]
+    pointIndex: -1
   }
 
   componentWillMount() {
@@ -29,6 +29,13 @@ export default class Chart extends Component {
 
   componentDidMount() {
     this.bounds = this.svg.getBoundingClientRect();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.pointIndex !== nextState.pointIndex) {
+      return true;
+    }
+    return false;
   }
 
   initValues = () => {
@@ -57,13 +64,18 @@ export default class Chart extends Component {
   }
 
   updateMouse = (x, y) => {
-    this.setState({ mousePos: [x - this.bounds.left, y - this.bounds.top] });
+    const { renderData } = this;
+
+    const localMousePosX = x - this.bounds.left;
+    const pointIndex = getNearestToAxisPointIndex(localMousePosX, renderData);
+
+    this.setState({ pointIndex });
   }
 
-  onMouseMove = debounce(e => this.updateMouse(e.clientX, e.clientY), 100, { 
+  onMouseMove = debounce(e => this.updateMouse(e.clientX, e.clientY), 16, { 
     leading: true,
     trailing: false,
-    maxWait: 100
+    maxWait: 25
   })
 
   render() {
@@ -76,10 +88,9 @@ export default class Chart extends Component {
       valueMin
     } = this.props;
 
-    const { mousePos } = this.state;
+    const { pointIndex } = this.state;
     const { renderData, backgroundLines } = this;
 
-    const pointIndex = getNearestToAxisPointIndex(mousePos[0], renderData);
     const isPoint = pointIndex > -1;
     const pointData = isPoint ? renderData[pointIndex] : null;
 
