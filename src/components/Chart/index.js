@@ -97,8 +97,7 @@ export default class Chart extends Component {
     return (
       <div 
         className={style.container} 
-        style={{ 
-          position: 'relative', 
+        style={{
           height: height + TIMELINE_HEIGHT,
           width: width + VALUELINE_WIDTH
         }}

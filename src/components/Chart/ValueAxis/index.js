@@ -3,13 +3,7 @@ import React from 'react';
 import style from './style.css'; 
 
 const Value = ({ value, height }) => 
-  <span 
-    className={style.value} 
-    style={{
-      position: 'absolute',
-      top: height
-    }}
-  >
+  <span className={style.value} style={{ top: height }}>
     {value}
   </span>;
 
