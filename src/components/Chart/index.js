@@ -78,6 +78,10 @@ export default class Chart extends Component {
     maxWait: 25
   })
 
+  onMouseLeave = e => {
+    this.setState({ pointIndex: -1 });
+  }
+
   render() {
     const {
       width,
@@ -107,6 +111,7 @@ export default class Chart extends Component {
           height={height} 
           width={width} 
           onMouseMove={this.onMouseMove}
+          onMouseLeave={this.onMouseLeave}
           ref={svg => { this.svg = svg; } }
         >
           {backgroundLines}
