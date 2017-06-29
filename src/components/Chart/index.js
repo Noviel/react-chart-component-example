@@ -75,14 +75,18 @@ export default class Chart extends Component {
     maxWait: 25
   })
 
+  shouldResetPointIndex = (target, exeptAttr) => {
+    return target === window || !target.getAttribute(exeptAttr);
+  }
+
   onMouseLeave = ({ relatedTarget }) => {
-    if (relatedTarget && !relatedTarget.getAttribute('data-popup')) {
+    if (this.shouldResetPointIndex(relatedTarget, 'data-popup')) {
       this.setState({ pointIndex: -1 });
     }
   }
 
   onMouseLeavePopup = ({ relatedTarget }) => {
-    if (relatedTarget && !relatedTarget.getAttribute('data-chart')) {
+    if (this.shouldResetPointIndex(relatedTarget, 'data-chart')) {
       this.setState({ pointIndex: -1 });
     }
   }
