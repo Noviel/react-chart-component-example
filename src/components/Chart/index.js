@@ -32,10 +32,7 @@ export default class Chart extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.pointIndex !== nextState.pointIndex) {
-      return true;
-    }
-    return false;
+    return this.state.pointIndex !== nextState.pointIndex;
   }
 
   initValues = () => {
@@ -59,8 +56,6 @@ export default class Chart extends Component {
       valueMin,
       valueMax
     });
-    // all data should belongs to one year
-    this.year = data[0].date.year;
   }
 
   updateMouse = (x, y) => {
@@ -97,6 +92,7 @@ export default class Chart extends Component {
 
     const isPoint = pointIndex > -1;
     const pointData = isPoint ? renderData[pointIndex] : null;
+    const year = data[0].date.year;
 
     return (
       <div 
@@ -137,7 +133,7 @@ export default class Chart extends Component {
           />
         }
         <ValueAxis height={height} min={valueMin} max={valueMax} step={valueStep} />
-        <Timeline width={width} year={data[0].date.year} offset={height + 20} />
+        <Timeline width={width} year={year} offset={height + 20} />
       </div>
     );
   }
