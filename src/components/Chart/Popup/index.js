@@ -37,10 +37,15 @@ const renderDate = date =>
 
 const renderValue = value => <b>$ {value} </b>;
 
-export default function Popup({ position, diff, data, parentWidth, parentHeight }) {
+export default function Popup({ position, diff, data, parentWidth, parentHeight, onMouseLeave }) {
   const adjustedPosition = adjustPosition(position, parentWidth, parentHeight);
   return (
-    <div {...popupAttribute} className={style.popup} style={createPopupStyle(adjustedPosition)}>
+    <div 
+      {...popupAttribute} 
+      className={style.popup} 
+      style={createPopupStyle(adjustedPosition)}
+      onMouseLeave={onMouseLeave}
+    >
       {renderDate(data.date)}
       <div>
         {renderValue(data.value)}

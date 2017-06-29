@@ -18,6 +18,8 @@ import { createRenderData } from '../../lib/coordinates';
 const TIMELINE_HEIGHT = 58;
 const VALUELINE_WIDTH = 32;
 
+const chartAttribute = { 'data-chart': true };
+
 export default class Chart extends Component {
   state = {
     pointIndex: -1
@@ -74,7 +76,13 @@ export default class Chart extends Component {
   })
 
   onMouseLeave = ({ relatedTarget }) => {
-    if (!relatedTarget.getAttribute('data-popup')) {
+    if (relatedTarget && !relatedTarget.getAttribute('data-popup')) {
+      this.setState({ pointIndex: -1 });
+    }
+  }
+
+  onMouseLeavePopup = ({ relatedTarget }) => {
+    if (relatedTarget && !relatedTarget.getAttribute('data-chart')) {
       this.setState({ pointIndex: -1 });
     }
   }
@@ -105,6 +113,7 @@ export default class Chart extends Component {
         }}
       >
         <svg
+          {...chartAttribute}
           className={style.svg}
           height={height} 
           width={width} 
@@ -132,6 +141,7 @@ export default class Chart extends Component {
             parentHeight={height}
             diff={getPointsDiff(data, pointIndex)} 
             data={data[pointIndex]}
+            onMouseLeave={this.onMouseLeavePopup}
           />
         }
         <ValueAxis height={height} min={valueMin} max={valueMax} step={valueStep} />
