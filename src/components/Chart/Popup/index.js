@@ -6,6 +6,8 @@ import { formatDate } from '../../../lib/date';
 const negativeDiffSign = '\u25BC';
 const positiveDiffSign = '\u25B2';
 
+const popupAttribute = { 'data-popup': true };
+
 const adjustPosition = ([x, y], width = 640, height = 320) => {
   const newX = (x > width - 150) ? (x - 100) : (x + 35);
   const newY = y > 60 ? (y - 50) : (y + 30);
@@ -38,7 +40,7 @@ const renderValue = value => <b>$ {value} </b>;
 export default function Popup({ position, diff, data, parentWidth, parentHeight }) {
   const adjustedPosition = adjustPosition(position, parentWidth, parentHeight);
   return (
-    <div className={style.popup} style={createPopupStyle(adjustedPosition)}>
+    <div {...popupAttribute} className={style.popup} style={createPopupStyle(adjustedPosition)}>
       {renderDate(data.date)}
       <div>
         {renderValue(data.value)}

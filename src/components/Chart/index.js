@@ -73,8 +73,10 @@ export default class Chart extends Component {
     maxWait: 25
   })
 
-  onMouseLeave = e => {
-    this.setState({ pointIndex: -1 });
+  onMouseLeave = ({ relatedTarget }) => {
+    if (!relatedTarget.getAttribute('data-popup')) {
+      this.setState({ pointIndex: -1 });
+    }
   }
 
   render() {
